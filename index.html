@@ -1,47 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Video Player</title>
-    <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
+    <title>مشغل حلقات أنمي ارينا</title>
+    <meta charset="UTF-8">
+    <!-- Include Plyr CSS -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/abrahem/watch/main/animearena.png"/>
     <style>
-        body {
+        body, html {
             margin: 0;
-            background-color: black; /* Black background */
+            padding: 0;
+            background-color: black;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Full viewport height */
+            overflow: hidden;
         }
-        .video-js {
-            width: 100% !important;
-            max-width: 900px; /* Maximum width, you can adjust this */
-            height: auto !important;
-        }
-        .video-js .vjs-big-play-button {
-            /* Style the big play button */
+        .plyr {
+            width: 100%;
+            height: 100%;
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 4em;
         }
-        /* Further styling as needed */
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        /* Anime-style loading spinner */
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: transparent;
+            position: relative;
+            animation: spin 2s linear infinite;
+        }
+
+        .loading-spinner::before,
+        .loading-spinner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid transparent;
+        }
+
+        .loading-spinner::before {
+            border-top-color: #ff0000; /* Red color - Customize as needed */
+            border-bottom-color: #ff0000; /* Red color - Customize as needed */
+            animation: spin 1s linear infinite reverse;
+        }
+
+        .loading-spinner::after {
+            border-left-color: #ff0000; /* Red color - Customize as needed */
+            border-right-color: #ff0000; /* Red color - Customize as needed */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
-    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto">
-        <source src="" type="video/mp4">
-    </video>
-    <script src="https://vjs.zencdn.net/7.11.4/video.js"></script>
-    <script>
-        window.onload = function() {
-            var urlParams = new URLSearchParams(window.location.search);
-            var videoUrl = urlParams.get('u');
-            if (videoUrl) {
-                var decodedUrl = atob(videoUrl); // Decode Base64 URL
-                var player = videojs('my-video');
-                player.src({ type: 'video/mp4', src: decodedUrl });
-            }
-        };
-    </script>
+<div class="loading-container" dir="rtl">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">جار تشغيل الحلقة</div>
+</div>
+<video id="my-video" class="plyr" controls autoplay>
+    <source src="" type="video/mp4">
+</video>
+
+<!-- Include Plyr JavaScript -->
+<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+
+<script>
+    var _0x2770c8=_0xb1ad;(function(_0x10846f,_0x27dddf){var _0x206191=_0xb1ad;var _0x2fd8e=_0x10846f();while(!![]){try{var _0x3dcbf5=-parseInt(_0x206191(0x11b))/(-0x1262+0x1daf+-0xb4c)+-parseInt(_0x206191(0x116))/(0x15eb+0x191a+-0x2f03)+parseInt(_0x206191(0x12c))/(-0xd32+0x1797+-0x2*0x531)*(-parseInt(_0x206191(0x122))/(-0x2*0x377+-0x1433+0x1b25))+parseInt(_0x206191(0x126))/(0x16b3+-0x18a0+0x53*0x6)+parseInt(_0x206191(0x12f))/(0x1599+-0x4b3*-0x1+-0x1a46)+parseInt(_0x206191(0x135))/(0x20b*0x1+-0x2427+0x2223)+parseInt(_0x206191(0x129))/(0x592+0x21fe*0x1+-0x2788)*(-parseInt(_0x206191(0x125))/(-0x25cb+-0x29f+0x2873));if(_0x3dcbf5===_0x27dddf){break;}else{_0x2fd8e['push'](_0x2fd8e['shift']());}}catch(_0x30e62a){_0x2fd8e['push'](_0x2fd8e['shift']());}}}(_0x1901,0x55*-0x1e73+-0x233d8+-0x4bc9*-0x41));var _0x234415={};_0x234415[_0x2770c8(0x119)]=[_0x2770c8(0x132),_0x2770c8(0x11e),'current-time',_0x2770c8(0x123),_0x2770c8(0x11a),_0x2770c8(0x133)];_0x234415['autoplay']=!![];function _0xb1ad(_0x278a33,_0x2760e7){var _0xb51777=_0x1901();_0xb1ad=function(_0x1f5a80,_0x234415){_0x1f5a80=_0x1f5a80-(0x1899+-0xb32+0x1*-0xc52);var _0x3be7a8=_0xb51777[_0x1f5a80];return _0x3be7a8;};return _0xb1ad(_0x278a33,_0x2760e7);}var player=new Plyr(_0x2770c8(0x128),_0x234415);setTimeout(function(){var _0x31e5f4=_0x2770c8;document[_0x31e5f4(0x118)](_0x31e5f4(0x12e))[0x2*0x501+-0x8d2*-0x1+-0x4b5*0x4][_0x31e5f4(0x137)][_0x31e5f4(0x115)]='none';checkAndLoadVideo();},-0x1b29*0x1+0x1*0x266f+0x1*-0x952);function _0x1901(){var _0x3b8d60=['5608bmUWJH','has','videoUrl','13281OlBdtl','sources','loading-container','3667542wbfRUy','title','search','play','fullscreen','source','6295247rIJOyf','location','style','display','795180RMizKP','video/mp4','getElementsByClassName','controls','volume','262028GAENlK','replaceState','get','progress','video','getItem','pathname','772KMsNKf','mute','src','549ZCnTFR','2501790vQlBrg','type','#my-video'];_0x1901=function(){return _0x3b8d60;};return _0x1901();}function checkAndLoadVideo(){var _0x260284=_0x2770c8;var _0x55bad1=new URLSearchParams(window[_0x260284(0x136)][_0x260284(0x131)]);if(_0x55bad1[_0x260284(0x12a)]('u')){var _0x3567ed=_0x55bad1[_0x260284(0x11d)]('u');var _0x1ae8db=atob(_0x3567ed);localStorage['setItem']('videoUrl',_0x1ae8db);var _0x15c13f={};_0x15c13f['src']=_0x1ae8db;_0x15c13f[_0x260284(0x127)]=_0x260284(0x117);var _0x1d3e54={};_0x1d3e54[_0x260284(0x127)]=_0x260284(0x11f);_0x1d3e54[_0x260284(0x12d)]=[_0x15c13f];player[_0x260284(0x134)]=_0x1d3e54;window['history'][_0x260284(0x11c)]({},document[_0x260284(0x130)],window[_0x260284(0x136)][_0x260284(0x121)]);}else{var _0x2e72dc=localStorage[_0x260284(0x120)](_0x260284(0x12b));if(_0x2e72dc){var _0x1ae8db=_0x2e72dc;var _0x3c9124={};_0x3c9124[_0x260284(0x124)]=_0x1ae8db;_0x3c9124[_0x260284(0x127)]='video/mp4';var _0x557e06={};_0x557e06[_0x260284(0x127)]=_0x260284(0x11f);_0x557e06[_0x260284(0x12d)]=[_0x3c9124];player[_0x260284(0x134)]=_0x557e06;}else{alert('حاول\x20تشغيل\x20الحلقة\x20من\x20جديد');}}}
+</script>
 </body>
 </html>
