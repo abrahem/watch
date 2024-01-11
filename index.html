@@ -4,21 +4,31 @@
     <title>Video Player</title>
     <link href="https://vjs.zencdn.net/7.11.4/video-js.css" rel="stylesheet" />
     <style>
-        .video-js .vjs-control-bar {
-            font-size: 14px; /* Similar to YouTube's Control Bar Font Size */
+        body {
+            margin: 0;
+            background-color: black; /* Black background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+        }
+        .video-js {
+            width: 100% !important;
+            max-width: 900px; /* Maximum width, you can adjust this */
+            height: auto !important;
         }
         .video-js .vjs-big-play-button {
+            /* Style the big play button */
             top: 50%;
             left: 50%;
-            margin-top: -22px;
-            margin-left: -45px;
-            /* Adjust the size and position of the play button */
+            transform: translate(-50%, -50%);
+            font-size: 4em;
         }
-        /* Add more custom CSS as needed */
+        /* Further styling as needed */
     </style>
 </head>
 <body>
-    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto" width="640" height="264">
+    <video id="my-video" class="video-js vjs-default-skin" controls preload="auto">
         <source src="" type="video/mp4">
     </video>
     <script src="https://vjs.zencdn.net/7.11.4/video.js"></script>
@@ -27,7 +37,7 @@
             var urlParams = new URLSearchParams(window.location.search);
             var videoUrl = urlParams.get('u');
             if (videoUrl) {
-                var decodedUrl = atob(videoUrl); // Decode the Base64 URL
+                var decodedUrl = atob(videoUrl); // Decode Base64 URL
                 var player = videojs('my-video');
                 player.src({ type: 'video/mp4', src: decodedUrl });
             }
